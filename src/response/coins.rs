@@ -123,7 +123,7 @@ pub struct CoinsItem {
     pub developer_data: Option<DeveloperData>,
     //pub public_interest_stats: PublicInterestStats,
     pub status_updates: Vec<Value>,
-    pub last_updated: String,
+    pub last_updated: Value,
     pub tickers: Option<Vec<Ticker>>,
 }
 
