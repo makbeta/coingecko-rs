@@ -106,7 +106,7 @@ pub struct CoinsItem {
     pub description: Description,
     pub links: Links,
     pub image: Image,
-    pub country_origin: String,
+    pub country_origin: Value,
     pub genesis_date: Value,
     pub contract_address: Option<String>,
     pub sentiment_votes_up_percentage: Value,
