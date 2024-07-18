@@ -85,19 +85,10 @@ pub struct DetailPlatform {
     pub decimal_place: Option<i64>,
 }
 
-fn null_to_default<'de, D, T>(de: D) -> Result<T, D::Error>
-where
-    D: Deserializer<'de>,
-    T: Default + Deserialize<'de>,
-{
-    let key = Option::<T>::deserialize(de)?;
-    Ok(key.unwrap_or_default())
-}
-
 // ---------------------------------------------
 //  /coins/{id}
 // ---------------------------------------------
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Default, Debug, Clone)]
 pub struct CoinsItem {
     pub id: String,
     pub symbol: String,
@@ -118,8 +109,6 @@ pub struct CoinsItem {
     pub country_origin: Value,
     pub genesis_date: Value,
     pub contract_address: Option<String>,
-    #[serde(deserialize_with = "null_to_default")]
-    pub announcement_url: Vec<String>,
     pub sentiment_votes_up_percentage: Value,
     pub sentiment_votes_down_percentage: Value,
     pub market_cap_rank: Value,
@@ -138,7 +127,7 @@ pub struct CoinsItem {
     pub tickers: Option<Vec<Ticker>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Default, Debug, Clone)]
 pub struct Description {
     pub en: Option<String>,
     pub de: Option<String>,
