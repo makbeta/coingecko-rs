@@ -1,5 +1,5 @@
 #![allow(missing_docs)]
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
 
@@ -85,6 +85,15 @@ pub struct DetailPlatform {
     pub decimal_place: Option<i64>,
 }
 
+fn null_to_default<'de, D, T>(de: D) -> Result<T, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Default + Deserialize<'de>,
+{
+    let key = Option::<T>::deserialize(de)?;
+    Ok(key.unwrap_or_default())
+}
+
 // ---------------------------------------------
 //  /coins/{id}
 // ---------------------------------------------
@@ -93,13 +102,13 @@ pub struct CoinsItem {
     pub id: String,
     pub symbol: String,
     pub name: String,
-    pub web_slug: String,
+    // pub web_slug: String,
     pub asset_platform_id: Option<String>,
     pub platforms: HashMap<String, String>,
     pub detail_platforms: HashMap<String, DetailPlatform>,
     pub block_time_in_minutes: f64,
     pub hashing_algorithm: Value,
-    pub categories: Vec<String>,
+    // pub categories: Vec<String>,
     pub public_notice: Value,
     pub additional_notices: Vec<Value>,
     pub localization: Option<Localization>,
@@ -109,6 +118,8 @@ pub struct CoinsItem {
     pub country_origin: Value,
     pub genesis_date: Value,
     pub contract_address: Option<String>,
+    #[serde(deserialize_with = "null_to_default")]
+    pub announcement_url: Vec<String>,
     pub sentiment_votes_up_percentage: Value,
     pub sentiment_votes_down_percentage: Value,
     pub market_cap_rank: Value,
