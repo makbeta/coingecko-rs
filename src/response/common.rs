@@ -279,7 +279,7 @@ pub struct CodeAdditionsDeletions4Weeks {
 #[derive(Serialize, Deserialize, Default, Debug, Clone)]
 pub struct Links {
     pub homepage: Vec<String>,
-    pub blockchain_site: Vec<String>,
+    pub blockchain_site: Vec<Value>,
     pub official_forum_url: Vec<String>,
     pub chat_url: Vec<String>,
     pub announcement_url: Vec<Value>,
