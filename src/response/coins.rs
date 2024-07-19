@@ -222,7 +222,7 @@ pub struct MarketData {
     pub circulating_supply: Value,
     #[serde(rename = "sparkline_7d")]
     pub sparkline7_d: Option<Sparkline7D>,
-    pub last_updated: String,
+    pub last_updated: Value,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
