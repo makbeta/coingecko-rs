@@ -281,7 +281,7 @@ pub struct Links {
     pub homepage: Vec<String>,
     pub blockchain_site: Vec<Value>,
     pub official_forum_url: Vec<String>,
-    pub chat_url: Vec<String>,
+    pub chat_url: Vec<Value>,
     pub announcement_url: Vec<Value>,
     pub twitter_screen_name: Value,
     pub facebook_username: Value,
